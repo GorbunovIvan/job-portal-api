@@ -1,0 +1,101 @@
+############
+### Auth ###
+############
+
+###
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "applicant@example.com",
+  "password": "applicant"
+}
+
+###
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "employer@example.com",
+  "password": "employer"
+}
+
+
+############
+### JOBS ###
+############
+
+###
+GET http://localhost:8080/api/v1/jobs/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjk5MTc2OSwiZXhwIjoxNzUyOTk1MzY5fQ.IlX7c4xvWAY2LyI8rPqjHiOz9KEss2WWTBv1InpO7AM
+
+###
+GET http://localhost:8080/api/v1/jobs
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjk5MTc2OSwiZXhwIjoxNzUyOTk1MzY5fQ.IlX7c4xvWAY2LyI8rPqjHiOz9KEss2WWTBv1InpO7AM
+
+###
+GET http://localhost:8080/api/v1/jobs?keyword=develop
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjk5MTc2OSwiZXhwIjoxNzUyOTk1MzY5fQ.IlX7c4xvWAY2LyI8rPqjHiOz9KEss2WWTBv1InpO7AM
+
+###
+GET http://localhost:8080/api/v1/jobs/employer/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjk5MTc2OSwiZXhwIjoxNzUyOTk1MzY5fQ.IlX7c4xvWAY2LyI8rPqjHiOz9KEss2WWTBv1InpO7AM
+
+###
+GET http://localhost:8080/api/v1/jobs/my
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjk5MTc2OSwiZXhwIjoxNzUyOTk1MzY5fQ.IlX7c4xvWAY2LyI8rPqjHiOz9KEss2WWTBv1InpO7AM
+
+###
+POST http://localhost:8080/api/v1/jobs
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjk5MTc2OSwiZXhwIjoxNzUyOTk1MzY5fQ.IlX7c4xvWAY2LyI8rPqjHiOz9KEss2WWTBv1InpO7AM
+Content-Type: application/json
+
+{
+  "title": "test",
+  "description": "test-test-test",
+  "location": "London, Canada",
+  "salaryMin": 1500,
+  "salaryMax": 3300,
+  "jobType": "FULL_TIME"
+}
+
+###
+PUT http://localhost:8080/api/v1/jobs/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjk5MTc2OSwiZXhwIjoxNzUyOTk1MzY5fQ.IlX7c4xvWAY2LyI8rPqjHiOz9KEss2WWTBv1InpO7AM
+Content-Type: application/json
+
+{
+  "title": "Frontend Developer Intern (updated)",
+  "description": "updated-updated-updated",
+  "location": "London but remote",
+  "salaryMin": 1,
+  "salaryMax": 21000,
+  "jobType": "FREELANCE"
+}
+
+###
+DELETE http://localhost:8080/api/v1/jobs/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlbXBsb3llckBleGFtcGxlLmNvbSIsImlhdCI6MTc1Mjk5MTc2OSwiZXhwIjoxNzUyOTk1MzY5fQ.IlX7c4xvWAY2LyI8rPqjHiOz9KEss2WWTBv1InpO7AM
+
+
+############
+### APPLICATIONS ###
+############
+
+GET http://localhost:8080/api/v1/applications
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcHBsaWNhbnRAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTI5OTE3NDQsImV4cCI6MTc1Mjk5NTM0NH0.75jh2imct7gDVYwwoUq_VfXzCS8jl4HVKunDmrydwOM
+
+###
+POST http://localhost:8080/api/v1/applications
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcHBsaWNhbnRAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTI5OTE3NDQsImV4cCI6MTc1Mjk5NTM0NH0.75jh2imct7gDVYwwoUq_VfXzCS8jl4HVKunDmrydwOM
+Content-Type: application/json
+
+{
+  "jobId": 1,
+  "coverLetter": "test-alice",
+  "resumeLink": "https://sdfsdf.com"
+}
+
+###
+DELETE http://localhost:8080/api/v1/applications/3
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhbGljZUBleGFtcGxlLmNvbSIsImlhdCI6MTc1MjgxNzk3OSwiZXhwIjoxNzUyODIxNTc5fQ.r9etGbDoOXJVWMnGAx4U2zDHJVEYk5yfz5QTnJQno2c

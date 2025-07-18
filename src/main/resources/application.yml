@@ -10,3 +10,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+  security:
+    jwt:
+      secret: very-secret-key-very-secret-key-very-secret-key-very-secret-key-very-secret-key-very-secret-key
+      expiration: 60  # In minutes

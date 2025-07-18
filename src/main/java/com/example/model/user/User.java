@@ -8,6 +8,8 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.Instant;
 import java.util.Collection;
@@ -21,7 +23,7 @@ import java.util.Set;
 @Getter @Setter
 @EqualsAndHashCode(of = { "email" })
 @ToString
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,24 +56,17 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     @Fetch(FetchMode.SUBSELECT)  // To avoid "N+1"
-    @Setter(AccessLevel.PROTECTED)
     private Set<Role> roles = new HashSet<>();
 
+    // Security
 
-    // Utility methods that synchronize both ends whenever another side element is added or removed.
-    public void addSpecialties(Collection<Role> roles) {
-        roles.forEach(this::addRole);
-    }
-    public void addRole(Role role) {
-        roles.add(role);
-        role.getUsers().add(this);
+    @Override
+    public String getUsername() {
+        return getEmail();
     }
 
-    public void removeSpecialties(Collection<Role> roles) {
-        roles.forEach(this::removeRole);
-    }
-    public void removeRole(Role role) {
-        roles.remove(role);
-        role.getUsers().remove(this);
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
     }
 }
