@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  security:
+    jwt:
+      secret: test-secret-key-test-secret-key-test-secret-key-test-secret-key-test-secret-key-test-secret-key
+      expiration: 30  # In minutes
+  flyway:
+    enabled: false
