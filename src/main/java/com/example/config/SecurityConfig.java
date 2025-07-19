@@ -25,6 +25,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
+                        .requestMatchers("/swagger.html","/swagger-ui/**", "/swagger-ui.html", "/docs/**", "/v3/api-docs/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .with(jwtConfigurer, customizer -> customizer.setBuilder(http))
