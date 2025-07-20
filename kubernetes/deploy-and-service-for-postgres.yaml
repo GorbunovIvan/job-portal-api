@@ -1,0 +1,62 @@
+# Postgres Deployment
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: postgres-deployment
+  labels:
+    app: job-portal-api-postgres
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      project: job-portal-api-postgres
+  template:
+    metadata:
+      labels:
+        project: job-portal-api-postgres
+    spec:
+      containers:
+        - name : postgres
+          image: postgres:latest
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "postgres"
+            - name: POSTGRES_PASSWORD
+              value: "root"
+            - name: POSTGRES_DB
+              value: "job-portal-api"
+            - name: PGDATA
+              value: "/var/lib/postgresql/data"
+          readinessProbe:
+            exec:
+              command:
+                - "pg_isready"
+                - "-U"
+                - "postgres"
+                - "-d"
+                - "job-portal-api"
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            successThreshold: 1
+            failureThreshold: 3
+
+---
+# Postgres Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-db
+  labels:
+     env  : dev
+     owner: IvanGorbunov
+spec:
+  selector:
+    project: job-portal-api-postgres
+  ports:
+    - name      : postgres-listener
+      protocol  : TCP
+      port      : 5432
+      targetPort: 5432
