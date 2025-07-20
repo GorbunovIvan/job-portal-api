@@ -13,3 +13,6 @@ spring:
       expiration: 30  # In minutes
   flyway:
     enabled: false
+  kafka:
+    consumer:
+      enabled: false

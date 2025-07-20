@@ -14,3 +14,10 @@ spring:
     jwt:
       secret: very-secret-key-very-secret-key-very-secret-key-very-secret-key-very-secret-key-very-secret-key
       expiration: 60  # In minutes
+  kafka:
+    bootstrap-servers: localhost:9092
+    topic-applications: "topic-applications"
+    consumer:
+      enabled: false
+      group-id: app.1
+#      auto-offset-reset: earliest
